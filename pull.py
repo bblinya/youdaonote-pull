@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 import re
 import logging
 from markdownify import markdownify as md
+from utils import minio_upload
 
 # logging.basicConfig(level=logging.INFO)
 
@@ -590,6 +591,14 @@ class YoudaoNoteSession(requests.Session):
 
         if 'note.youdao.com' not in url:
             return url
+
+        url = self.download_file(url, file_path, attach_name)
+        new_url = minio_upload.upload_fobject(url)
+        print("\t=> minio: ", new_url)
+        if new_url.startswith("error"):
+            self.print_download_yd_image_error(url)
+        return new_url
+
         # 当 smms_secret_token 为空（不上传到 SM.MS）和是附件时，下载到图片和附件到本地
         if self.smms_secret_token == '' or attach_name != '':
             return self.download_file(url, file_path, attach_name)
@@ -645,6 +654,7 @@ class YoudaoNoteSession(requests.Session):
             print(url + ' %s有误！' % file_type)
             return url
 
+        return local_file_path
         relative_file_path = self.set_relative_file_path(file_path, file_name, local_file_dir)
         return relative_file_path
 

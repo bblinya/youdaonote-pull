@@ -1,8 +1,15 @@
 {
-    "username": "",
-    "password": "",
+    "username": "qq9FF2BA5BB58586C5B081B6B42169DD45",
+    "password": "test",
     "local_dir": "",
     "ydnote_dir": "",
-    "smms_secret_token": ""
+    "smms_secret_token": "8bfaCfFtLS3wUBl47Ls7Ip2xgl7Xb5MH",
+
+    "is_https": false,
+    "server_url": "bblinya.top:9000",
+    "access_key": "storage",
+    "secret_key": "bblinya@Nb6f",
+    "bucket_name": "bbwave",
+    "object_path": "youdao-note/%Y-%m"
 }
 
